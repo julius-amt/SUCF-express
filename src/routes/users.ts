@@ -38,9 +38,11 @@ export const getUsers = (request: Request, response: Response) => {
 };
 
 export const createUser = (request: Request, response: Response) => {
+    // Handle data from either JSON or form data
     let { username } = request.body;
-    // handle empty username
-    username = username.trim() as string;
+
+    username = username ? username.trim() : "";
+    // handle empty username and invalid username
     if (!username || typeof username !== "string") {
         response.status(400).send("Invalid username");
     }
